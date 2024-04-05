@@ -142,3 +142,13 @@ button:hover {
   background-color:#32927C;
   transition: margin-right 2s ease-in-out .5s;
 }
+
+/* DEV - NO LOGIN */
+
+#dev_view-no_login{
+  padding: 20px;
+  width: 400px;
+}
+#nologin_message{
+  color: #970404;
+}

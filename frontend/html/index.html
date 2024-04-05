@@ -23,13 +23,23 @@
       <button id="view-public-dashboard">Public dashboard</button>
       <button id="view-developer-dashboard">Developer dashboard</button>
     </div>
-    <div class="container">
+    <!-- PUBLIC -->
+    <div id="public_view" class="container">
       <div class="dashboard">
         <h2>APPNAME</h2>
         <p class="section">Status: Stable</p>
         <p class="section">Endpoints:</p>
         <a href="../endpointsPage/endpoints.html">See more</a>
       </div>
+    </div>
+    <!-- DEV - NOT LOGGED IN -->
+    <div id="dev_view-no_login" class="hidden">
+      <h2 id="nologin_message">
+        You need to log in to view your apps!
+      </h2>
+      <h3 id="nologin_instruction">
+        Click the button in the top right corner to log in with Google.
+      </h3>
     </div>
     <div id="submit-new">
       <h2>Submit a new app:</h2>

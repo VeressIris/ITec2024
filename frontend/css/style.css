@@ -4,10 +4,11 @@ D5205A - pink
 3A7D44 - fern green
 */
 
-/*HIDDEN CLASS*/
+/* HIDDEN CLASS */
 .hidden{
     display:none;
 }
+/**/
 
 body {
   font-family: "Ubuntu", sans-serif;
@@ -100,7 +101,7 @@ button:hover {
     text-align:left;
     font-size: 18px;
 }
-/* LOGIN AND LOGOUT */
+/* LOGIN AND LOGOUT button top right corner */
 #login-and-logout{
     border: none;
     height: 30px;
@@ -118,4 +119,26 @@ button:hover {
     margin:0;
     text-align:left;
     font-size: 18px;
+}
+
+/*Log buttons de pe login.html*/
+.log-buttons{
+    border: none;
+    height: 90px;
+    width: 210px;
+    background:#43BFC2;
+    margin-bottom:0;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.log-buttons p{
+  color: white;
+  font-weight:600;
+  margin:0;
+  text-align:center;
+  font-size: 18px;
+}
+.log-buttons:hover{
+  background-color:#32927C;
+  transition: margin-right 2s ease-in-out .5s;
 }

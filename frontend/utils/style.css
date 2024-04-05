@@ -30,3 +30,9 @@ body {
     font-size:27px;
     text-align: center;
 }
+#switch-dashboard button{
+    border-top:1px solid #226153;
+    border-left:1px solid #226153;
+    box-shadow: none;
+    background: none;
+}

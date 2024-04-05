@@ -18,6 +18,9 @@ body {
   box-sizing: border-box;
   background-color: #ffffff;
 }
+button:hover {
+  cursor: pointer;
+}
 
 /* Headings */
 
@@ -52,9 +55,6 @@ body {
   font-family: "Poppins", sans-serif;
   padding-left: 20px;
   margin-left: 0;
-}
-button:hover {
-  cursor: pointer;
 }
 #switch-dashboard button::before {
   margin-left: auto;
@@ -146,8 +146,11 @@ button:hover {
 /* DEV - NO LOGIN */
 
 #dev_view-no_login{
-  padding: 20px;
-  width: 400px;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  height: 253.2px;
+  width: 346.41px;
 }
 #nologin_message{
   color: #970404;

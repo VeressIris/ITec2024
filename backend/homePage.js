@@ -11,4 +11,37 @@ submitApp.addEventListener("click", () => {
 
 // FRONTEND JS
 
-const logInButton = document.getElementById('');
+// HTML elements
+const logButtonEl = document.getElementById('login-and-logout');
+const publicViewButtonEl = document.getElementById('view-public-dashboard');
+const devViewButtonEl = document.getElementById('view-developer-dashboard');
+const publicDashboardEl = document.getElementById('public_view');
+const devDashboardNoLoginEl = document.getElementById('dev_view-no_login');
+
+// Values from HTML elements
+const logStatus = logButtonEl.textContent;
+
+//Functions
+const publicBtnClickHandler = () => {
+    // console.log('buburubu')
+    publicDashboardEl.style.display = 'grid';
+    devDashboardNoLoginEl.classList.add('hidden');
+}
+const devBtnClickHandler = () => {
+    // console.log('mimimimimimimi mimimimi only me :D')
+    publicDashboardEl.style.display = 'none';
+    if (logStatus === 'Log in'){
+      // console.log('mimimo');
+      devDashboardNoLoginEl.classList.remove('hidden');
+    }
+    else if (logStatus === 'Log out'){
+      console.log('in progress');
+    }
+    else{
+      console.log(error);
+    }
+}
+
+console.log(logStatus);
+publicViewButtonEl.addEventListener('click', publicBtnClickHandler);
+devViewButtonEl.addEventListener('click', devBtnClickHandler);

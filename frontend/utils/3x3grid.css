@@ -28,7 +28,7 @@
     font-size:43px;
     /* align-self: center; */
 }
-.status{
+.section{
     font-weight: 500;
     margin-top: 0;
     font-size: 23px;
@@ -36,15 +36,6 @@
     color: #ffffff;
     width: 23vw;
     /* align-self: first baseline; */
-}
-.endpoint_nr{
-    /* font-family: "Oswald", sans-serif; */
-    font-weight: 300;
-    font-size: 23px;
-    margin-top: 0;
-    margin-bottom: 10px;
-    width: 23vw;
-    /* background-color:rgba(247,2,80,0.75) */
 }
 .dashboard a{
     /* font-family: "Oswald", sans-serif;  */
@@ -59,3 +50,25 @@
     /* font-family: "Oswald", sans-serif;  */
     text-shadow: 2px 2px 0px #226153;
 }
+/*ENDPOINTS ONLY*/
+
+/*!!!Public!!!*/
+#bug-report input{
+    height: 25px;
+    width: 250px;
+}
+#bug-report-button{
+    border: none;
+    height: 30px;
+    width: 75px;
+    background:#43BFC2;
+    margin-bottom:0;
+}
+#bug-report-button p{
+    color: white;
+    font-weight:600;
+    margin:0;
+    text-align:left;
+    font-size: 18px;
+}
+/*!!!Private!!!*/

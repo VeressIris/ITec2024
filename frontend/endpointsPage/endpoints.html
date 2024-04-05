@@ -16,17 +16,20 @@
   <body>
     <h1 id="bigheading">Itec monitor</h1>
     <h2 id="subheading">Monitor apps efficiently, quickly and hassle-free.</h2>
+    <div id="switch-dashboard">
+      <button id="view-public-dashboard">Public dashboard</button>
+      <button id="view-developer-dashboard">Developer dashboard</button>
+    </div>
     <div class="container">
       <div class="dashboard">
         <h2>ENDPOINT</h2>
-        <p class="status">Status: Stable</p>
-        <p class="endpoint_nr">History:</p>
+        <p class="section">Status: Stable</p>
+        <p class="section">History:</p>
+        
+        <form id="bug-report" action="submit">
         <p class="section">Bug reports:</p>
-        <p class="section">Bug reports:</p>
-        <a href="">See more</a>
-        <form action="">
-          <input type="text" style="height: 300px" />
-          <button type="submit">Submit</button>
+          <input type="text"/>
+          <button id="bug-report-button" type="submit"><p>Submit</p></button>
         </form>
       </div>
     </div>

@@ -64,6 +64,10 @@
     background:#43BFC2;
     margin-bottom:0;
 }
+#submit-bug:hover{
+    background-color:#32927C;
+    transition: margin-right 2s ease-in-out .5s;
+}
 #submit-bug p{
     color: white;
     font-weight:600;

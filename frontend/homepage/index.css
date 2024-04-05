@@ -1,5 +1,7 @@
 /*
-6E4555 - eggplant
+D5205A - pink
+69B578 - emerald green
+3A7D44 - fern green
 */
 
 body {
@@ -8,6 +10,7 @@ body {
     margin: 30px;
     padding: 30px;
     box-sizing: border-box;
+    background-color: #ffffff;
 }
 #bigheading {
     font-family: "Oswald", sans-serif;
@@ -15,4 +18,6 @@ body {
     font-weight: 600;
     font-size: 30pt;
     text-align: center;
+    color: black;
+    margin: auto;
 }

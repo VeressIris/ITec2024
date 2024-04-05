@@ -1,15 +1,3 @@
-/*
-6E4555 - eggplant
-*/
-
-body {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 400;
-    margin: 30px;
-    padding: 30px;
-    box-sizing: border-box;
-}
-
 .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

@@ -4,6 +4,11 @@ D5205A - pink
 3A7D44 - fern green
 */
 
+/*HIDDEN CLASS*/
+.hidden{
+    display:none;
+}
+
 body {
   font-family: "Ubuntu", sans-serif;
   font-weight: 400;

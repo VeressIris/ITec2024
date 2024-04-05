@@ -14,6 +14,9 @@
     <link rel="stylesheet" type="text/css" href="../utils/3x3grid.css" />
   </head>
   <body>
+    <div style="display: flex; flex-direction: column; align-items: last baseline;">
+      <button id="login-and-logout"><p>Log in</p></button>
+    </div>
     <h1 id="bigheading">Itec Monitor</h1>
     <h2 id="subheading">Watch all your apps on one page. For free.</h2>
     <div id="switch-dashboard">
@@ -28,9 +31,11 @@
         <a href="">See more</a>
       </div>
     </div>
-    <h2>Submit a new app:</h2>
-    <input id="app-name-text" type="text" style="height: 300px" />
-    <button id="submit-app">Add app</button>
+    <div id="submit-new">
+      <h2>Submit a new app:</h2>
+      <input id="app-name-text" type="text"/>
+      <button id="submit-app"><p>Add app</p></button>
+    </div>
     <script type="module" src="../../backend/homePage.js"></script>
   </body>
 </html>

@@ -1,12 +1,16 @@
-const endpointUrl = 'https://example.com/api/endpoint';
+const endpointUrl = "https://randomuser.me/api/";
 
 fetch(endpointUrl)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+  .then((response) => {
+    switch (response.status) {
+      case 200:
+        console.log("200 verde");
+        break;
+      default:
+        //check if bug is reported (marked as unstable)
+        console.log("rosu");
     }
-    console.log('Endpoint is reachable');
   })
-  .catch(error => {
-    console.error('There was a problem with the endpoint:', error.message);
+  .catch((error) => {
+    console.error("There was a problem with the endpoint:", error.message);
   });

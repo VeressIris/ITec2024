@@ -9,6 +9,7 @@ import {
   getDatabase,
   ref,
   set,
+  get,
 } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -35,6 +36,30 @@ function addUserToDatabase(user) {
   });
 }
 
+export async function addAppToDatabase(appName) {
+  const userUid = auth.currentUser.uid;
+  const userRef = ref(database, "users/" + userUid);
+
+  try {
+    const snapshot = await get(userRef);
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      const currentApps = userData.apps || []; // If no apps exist, default to an empty array
+      const updatedApps = [...currentApps, appName];
+
+      await set(userRef, { ...userData, apps: updatedApps });
+      console.log(`Added ${appName} to apps`);
+    } else {
+      console.error(`User ${userUid} does not exist`);
+    }
+  } catch (error) {
+    console.error(
+      `Error adding ${appName} to the apps array in the database:`,
+      error
+    );
+  }
+}
+
 const auth = getAuth();
 export function login() {
   signInWithPopup(auth, provider)
@@ -57,6 +82,7 @@ export function login() {
 export function logout() {
   signOut(auth)
     .then(() => {
+      localStorage.setItem("user", "");
       console.log("signed out");
     })
     .catch((error) => {
@@ -64,5 +90,4 @@ export function logout() {
     });
 }
 
-export function addAppsToDatabase(appName) {
-}
+export function addAppsToDatabase(appName) {}

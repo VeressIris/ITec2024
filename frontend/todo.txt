@@ -1,3 +1,8 @@
+pagini
+-chatgpt
+
+
+
 - tier 1:
     textbox + buton add (form)
     dashboarduri

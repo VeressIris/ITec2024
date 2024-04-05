@@ -76,3 +76,7 @@
     font-size: 18px;
 }
 /*!!!Private!!!*/
+#dev_view{
+    display: flex;
+    flex-direction: column;
+}

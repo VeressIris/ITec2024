@@ -53,18 +53,18 @@
 /*ENDPOINTS ONLY*/
 
 /*!!!Public!!!*/
-#bug-report input{
+#bug-text{
     height: 25px;
     width: 250px;
 }
-#bug-report-button{
+#submit-bug{
     border: none;
     height: 30px;
     width: 75px;
     background:#43BFC2;
     margin-bottom:0;
 }
-#bug-report-button p{
+#submit-bug p{
     color: white;
     font-weight:600;
     margin:0;

@@ -39,24 +39,27 @@ function addUserToDatabase(user) {
 export async function addAppToDatabase(appName) {
   const userUid = auth.currentUser.uid;
   const userRef = ref(database, "users/" + userUid);
+  const publicAppsRef = ref(database, "apps/");
 
   try {
     const snapshot = await get(userRef);
     if (snapshot.exists()) {
+      //add to dev apps
       const userData = snapshot.val();
-      const currentApps = userData.apps || []; // If no apps exist, default to an empty array
+      const currentApps = userData.apps || [];
       const updatedApps = [...currentApps, appName];
-
       await set(userRef, { ...userData, apps: updatedApps });
+
+      //add to public apps
+      const currentPublicApps = snapshot.val().apps || [];
+      const updatedPublicApps = [...currentPublicApps, appName];
+      await set(publicAppsRef, updatedPublicApps);
       console.log(`Added ${appName} to apps`);
     } else {
       console.error(`User ${userUid} does not exist`);
     }
   } catch (error) {
-    console.error(
-      `Error adding ${appName} to the apps array in the database:`,
-      error
-    );
+    console.error(`Error adding ${appName} to the apps array:`, error);
   }
 }
 

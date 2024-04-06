@@ -10,6 +10,7 @@ import {
   ref,
   set,
   get,
+  child,
 } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -36,7 +37,6 @@ function addUserToDatabase(user) {
     email: user.email,
   });
 }
-
 
 export function addAppToDatabase(appName) {
   const userUid = auth.currentUser.uid;
@@ -109,21 +109,4 @@ export function submitEndpoint(appName, endpointName) {
       status: "stable",
     }
   );
-}
-
-// READ NEW ITEM
-
-export function readFromDb(path){
-  get(child(database, path)).then((snapshot) => {
-  if (snapshot.exists()) {
-    console.log(snapshot.val());
-    return snapshot.val();
-  } else {
-    console.log("No data available");
-    return null;
-  }
-  }).catch((error) => {
-    console.error(error);
-    return null;
-  });
 }

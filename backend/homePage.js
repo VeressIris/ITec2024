@@ -54,11 +54,27 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 //functions
 
+// function renderApps() {
+//   get(child(ref(database), "apps/"))
+//     .then((snapshot) => {
+//       if (snapshot.exists()) {
+//         snapshot.forEach((childSnapshot) => {
+//           renderNewApp(childSnapshot.key, childSnapshot.val().status, 0);
+//         });
+//       } else {
+//         console.log("No data available");
+//       }
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// }
 function renderApps() {
-  get(child(ref(database), "apps/"))
+  get(child(ref(database), `users/${localStorage.getItem("currentUser")}/apps`))
     .then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
+          console.log(childSnapshot.key);
           renderNewApp(childSnapshot.key, childSnapshot.val().status, 0);
         });
       } else {

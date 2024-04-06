@@ -63,6 +63,7 @@ export function login() {
       const token = credential.accessToken;
       const user = result.user;
       addUserToDatabase(user);
+      localStorage.setItem("currentUser", user.uid);
       // IdP data available using getAdditionalUserInfo(result)
     })
     .catch((error) => {

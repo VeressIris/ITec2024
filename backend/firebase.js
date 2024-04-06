@@ -26,7 +26,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+export const database = getDatabase(app);
 const provider = new GoogleAuthProvider();
 
 function addUserToDatabase(user) {
@@ -36,6 +36,7 @@ function addUserToDatabase(user) {
     email: user.email,
   });
 }
+
 
 export function addAppToDatabase(appName) {
   const userUid = auth.currentUser.uid;
@@ -52,6 +53,7 @@ export function addAppToDatabase(appName) {
 }
 
 export const auth = getAuth();
+
 export function login() {
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -85,5 +87,22 @@ export function submitBug(text, app, endpoint) {
   set(ref(database, `apps/${app}/endpoints/${endpoint}`), {
     bug: text,
     solved: false,
+  });
+}
+
+// READ NEW ITEM
+
+export function readFromDb(path){
+  get(child(database, path)).then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    return snapshot.val();
+  } else {
+    console.log("No data available");
+    return null;
+  }
+  }).catch((error) => {
+    console.error(error);
+    return null;
   });
 }

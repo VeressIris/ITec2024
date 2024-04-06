@@ -45,18 +45,23 @@ const devBtnClickHandler = () => {
       console.log(error);
     }
 }
-// Render apps
+// RENDER APPS
+import { userUid , readFromDb } from "./firebase.js";
+//functions
+console.log(userUid)
+// const userApps = readFromDb(`users/${auth.currentUser.uid}/apps`);
+// console.log(userApps)
+//Render new application
 const renderNewApp = () => {
-  // de luat date din database
   
   const newAppHTML=`
-  <div class="dashboard">
-    <h2>${appName}</h2>
-    <p class="section">Status: ${appStatus}</p>
-    <p class="section">Endpoints: ${nrOfEndpoints}</p>
-    <a href="../html/endpoints.html">See more</a>
-  </div>`;
-}
+    <div class="dashboard">
+      <h2>${appName}</h2>
+      <p class="section">Status: ${appStatus}</p>
+      <p class="section">Endpoints: ${nrOfEndpoints}</p>
+      <a href="../html/endpoints.html">See more</a>
+    </div>`;
+  }
 
 console.log(logStatus);
 publicViewButtonEl.addEventListener('click', publicBtnClickHandler);

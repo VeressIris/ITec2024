@@ -14,13 +14,24 @@
     <link rel="stylesheet" type="text/css" href="../css/3x3grid.css" />
   </head>
   <body>
-    <div style="height: 70vh; display: flex; justify-content: center; align-items: center;flex-direction: column;">
-      <h1 id="bigheading" style="margin-bottom: 20px;">Welcome/Welcome back, developer!</h1>
-      <div style="display: flex; justify-content: center; align-items: center;">
+    <div
+      style="
+        height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      "
+    >
+      <h1 class="bigheading" style="margin-bottom: 20px">
+        Welcome/Welcome back, developer!
+      </h1>
+      <div style="display: flex; justify-content: center; align-items: center">
         <button class="log-buttons" id="login"><p>Login with google</p></button>
         <button class="log-buttons" id="logout"><p>Logout</p></button>
       </div>
     </div>
     <script type="module" src="../../backend/login.js"></script>
+    <script type="module" src="../../backend/firebase.js"></script>
   </body>
 </html>

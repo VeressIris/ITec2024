@@ -30,6 +30,7 @@ const database = getDatabase(app);
 const provider = new GoogleAuthProvider();
 
 function addUserToDatabase(user) {
+  //TODO: Check if user already exists (help mentor)
   set(ref(database, "users/" + user.uid), {
     name: user.displayName,
     email: user.email,
@@ -91,4 +92,9 @@ export function logout() {
     });
 }
 
-export function addAppsToDatabase(appName) {}
+export function submitBug(text, app, endpoint) {
+  set(ref(database, `apps/${app}/endpoints/${endpoint}`), {
+    bug: text,
+    solved: false,
+  });
+}

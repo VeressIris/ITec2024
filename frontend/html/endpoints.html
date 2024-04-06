@@ -14,21 +14,24 @@
     <link rel="stylesheet" type="text/css" href="../css/3x3grid.css" />
   </head>
   <body>
-    <div style="display: flex; flex-direction: column; align-items: last baseline;">
+    <div
+      style="display: flex; flex-direction: column; align-items: last baseline"
+    >
       <button id="login-and-logout"><p>Log in</p></button>
     </div>
-    <h1 id="bigheading" id="app-name">App name</h1>
+    <h1 class="bigheading" id="app-name">App name</h1>
     <div class="container">
       <div class="dashboard">
-        <h2>ENDPOINT</h2>
+        <h2 class="endpoint-name">Test endpoint</h2>
         <p class="section">Status: Stable</p>
         <p class="section">History:</p>
         <div id="bug-report">
           <p class="section">Bug reports:</p>
-          <input id="bug-text" type="text" />
-          <button id="submit-bug"><p>Submit</p></button>
+          <input class="bug-text" type="text" />
+          <button class="submit-bug"><p>Submit</p></button>
         </div>
       </div>
     </div>
+    <script type="module" src="../../backend/endpoints.js"></script>
   </body>
 </html>

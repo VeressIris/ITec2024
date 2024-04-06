@@ -90,6 +90,27 @@ export function submitBug(text, app, endpoint) {
   });
 }
 
+export function submitEndpoint(appName, endpointName) {
+  //set public endpoint
+  set(ref(database, `apps/${appName}/endpoints/${endpointName}`), {
+    bug: "",
+    solved: false,
+    status: "stable",
+  });
+  //set dev endpoint
+  set(
+    ref(
+      database,
+      `users/${auth.currentUser.uid}/apps/${appName}/endpoints/${endpointName}`
+    ),
+    {
+      bug: "",
+      solved: false,
+      status: "stable",
+    }
+  );
+}
+
 // READ NEW ITEM
 
 export function readFromDb(path){

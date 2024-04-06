@@ -108,17 +108,15 @@ button:hover {
   width: 70px;
   background: #43bfc2;
   margin-bottom: 0;
-}
-#login-and-logout:hover {
-  background-color: #32927c;
-  transition: margin-right 2s ease-in-out 0.5s;
-}
-#login-and-logout p {
   color: white;
   font-weight: 600;
   margin: 0;
   text-align: left;
   font-size: 18px;
+}
+#login-and-logout:hover {
+  background-color: #32927c;
+  transition: margin-right 2s ease-in-out 0.5s;
 }
 
 /*Log buttons de pe login.html*/

@@ -1,28 +1,13 @@
 import { getBugList, submitBug, submitEndpoint } from "./firebase.js";
-
-const appName = document.getElementById("app-name");
-
-function initBugButtons() {
-  const endpoints = document.getElementsByClassName("endpoint-name");
-  const endpointBugSubmit = document.getElementsByClassName("submit-bug");
-  const endpointBugText = document.getElementsByClassName("bug-text");
-  for (let i = 0; i < endpoints.length; i++) {
-    endpointBugSubmit[i].addEventListener("click", () => {
-      submitBug(
-        endpointBugText[i].value,
-        appName.innerHTML,
-        endpoints[i].innerText
-      );
-    });
-  }
-}
-
 import { database } from "./firebase.js";
 import {
   get,
   child,
   ref,
 } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+
+const appName = document.getElementById("app-name");
+
 const endpointText = document.getElementById("endpoint-text");
 const endpointSubmit = document.getElementById("submit-endpoint");
 
@@ -95,4 +80,3 @@ endpointSubmit.addEventListener("click", () => {
 });
 
 renderEndpoints();
-initBugButtons();

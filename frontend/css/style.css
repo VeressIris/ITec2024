@@ -169,6 +169,8 @@ button:hover {
   height: 30px;
   width: 300px;
 }
+
+/* SUBMIT ENDPOINT */
 #submit-endpoint{
   border: none;
   height: 40px;

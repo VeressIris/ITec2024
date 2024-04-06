@@ -31,23 +31,24 @@ export const database = getDatabase(app);
 const provider = new GoogleAuthProvider();
 
 function addUserToDatabase(user) {
-  //TODO: Check if user already exists (help mentor)
   set(ref(database, "users/" + user.uid), {
     name: user.displayName,
     email: user.email,
   });
 }
 
-export function addAppToDatabase(appName) {
+export function addAppToDatabase(appName, appLink) {
   if (appName === "") return;
   const userUid = auth.currentUser.uid;
   set(ref(database, `users/${userUid}/apps/${appName}`), {
+    link: appLink,
     developer: userUid,
     status: "stable",
   });
 
   //add public app
   set(ref(database, "apps/" + appName), {
+    link: appLink,
     developer: userUid,
     status: "stable",
   });

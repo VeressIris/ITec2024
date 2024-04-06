@@ -27,7 +27,10 @@ const devBtnClickHandler = () => {
     renderApps(`users/${localStorage.getItem("currentUser")}/apps`);
     const newAppHTML = `<div id="submit-new">
       <h2>Submit a new app:</h2>
+      <h3>App name:</h3>
       <input id="app-name-text" type="text" />
+      <h3>App link:</h3>
+      <input id="app-link-text" type="text" />
       <button id="submit-app"><p>Add app</p></button>
     </div>`;
     if (document.getElementById("submit-new") !== null) return;
@@ -35,7 +38,8 @@ const devBtnClickHandler = () => {
     const submitApp = document.getElementById("submit-app");
     submitApp.addEventListener("click", () => {
       const appName = document.getElementById("app-name-text").value;
-      addAppToDatabase(appName);
+      const appLink = document.getElementById("app-link-text").value;
+      addAppToDatabase(appName, appLink);
       dashboardEl.innerHTML = "";
       renderApps(`users/${localStorage.getItem("currentUser")}/apps`);
     });
@@ -59,7 +63,12 @@ function renderApps(path) {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
           console.log(childSnapshot.key);
-          renderNewApp(childSnapshot.key, childSnapshot.val().status, 0);
+          renderNewApp(
+            childSnapshot.key,
+            childSnapshot.val().link,
+            childSnapshot.val().status,
+            0
+          );
         });
       } else {
         console.log("No data available");
@@ -71,11 +80,16 @@ function renderApps(path) {
 }
 
 //Render new application
-const renderNewApp = (appName, appStatus, nrOfEndpoints) => {
+const renderNewApp = (appName, appLink, appStatus, nrOfEndpoints) => {
   const dashboardDiv = document.createElement("div");
   dashboardDiv.classList.add("dashboard");
   const heading = document.createElement("h2");
   heading.textContent = appName;
+  dashboardDiv.appendChild(heading);
+  const link = document.createElement("p");
+  link.classList.add("section");
+  link.textContent = appLink;
+  dashboardDiv.appendChild(link);
   const statusParagraph = document.createElement("p");
   statusParagraph.classList.add("section");
   statusParagraph.textContent = `Status: ${appStatus}`;

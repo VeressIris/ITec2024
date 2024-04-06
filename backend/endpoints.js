@@ -1,4 +1,4 @@
-import { submitBug, submitEndpoint } from "./firebase.js";
+import { getBugList, submitBug, submitEndpoint } from "./firebase.js";
 
 const appName = document.getElementById("app-name");
 const endpoints = document.getElementsByClassName("endpoint-name");
@@ -42,7 +42,7 @@ function renderEndpoints() {
       console.error(error);
     });
 }
-
+// PUBLIC
 function renderNewEndpoint (endPName, endPStatus) {
     const newEndpointHTML = `<div class="dashboard">
     <h2 class="endpoint-name">${endPName}</h2>
@@ -57,6 +57,17 @@ function renderNewEndpoint (endPName, endPStatus) {
   document
     .getElementById("endpoints_box")
     .insertAdjacentHTML("beforeend", newEndpointHTML);
+}
+//Not working
+function renderNewDevEndpoint (endPName, endPStatus){
+    getBugList();
+    let bugListDb;
+    let bugListEl = document.getElementById("bugList");
+    for (i = 0; i < bugListDb.length; ++i) {
+        let liAux = document.createElement('li');
+          liAux.innerHTML = `<li><label><input type="checkbox">${bugListDb[i]}</label></li>`;
+          bugListEl.appendChild(li);
+    }
 }
 
 endpointSubmit.addEventListener("click", () => {

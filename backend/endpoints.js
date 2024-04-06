@@ -11,8 +11,8 @@ const appName = document.getElementById("app-name");
 const endpointText = document.getElementById("endpoint-text");
 const endpointSubmit = document.getElementById("submit-endpoint");
 
-function renderEndpoints() {
-  get(child(ref(database), `apps/${appName.innerHTML}/endpoints`))
+function renderEndpoints(path) {
+  get(child(ref(database), path))
     .then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
@@ -76,27 +76,17 @@ function renderNewDevEndpoint(endPName, endPStatus) {
   history.className = "section";
   history.innerText = "History:";
   dashboard.appendChild(history);
-  const bugList = document.createElement("div");
-  bugList.id = "bug-list";
-  
-  // const bugReportTitle = document.createElement("p");
-  // bugReportTitle.className = "section";
-  // bugReportTitle.innerText = "Bug reports:";
-  // bugReports.appendChild(bugReportTitle);
-  // const bugText = document.createElement("input");
-  // bugText.type = "text";
-  // bugText.className = "bug-text";
-  // bugReports.appendChild(bugText);
-  // const submitButton = document.createElement("button");
-  // submitButton.className = "submit-bug";
-  // submitButton.innerHTML = "<p>Submit</p>";
-  // submitButton.addEventListener("click", () => {
-  //   submitBug(bugText.value, appName.innerHTML, endPName);
-  // });
-  // bugReports.appendChild(submitButton);
-  // dashboard.appendChild(bugReports);
-  // document.getElementById("endpoints_box").appendChild(dashboard);
+  const bugListElem = document.createElement("div");
+  bugListElem.id = "bug-list";
+  const bugList = getBugList(appName.innerHTML, endPName);
+  bugList.forEach((bug) => {
+    const bugElem = document.createElement("p");
+    bugElem.innerText = bug;
+    bugListElem.appendChild(bugElem);
+  });
+  dashboard.appendChild(bugListElem);
 }
+
 //Not working
 function renderDevEndpoints(endPName, endPStatus) {
   get(child(ref(database), `apps/${appName.innerHTML}/endpoints`))
@@ -120,5 +110,9 @@ endpointSubmit.addEventListener("click", () => {
   submitEndpoint(appName.innerHTML, endpointText.value);
 });
 
-renderEndpoints();
-getBugList("App name", "testing");
+//public
+// renderEndpoints(`apps/${appName.innerHTML}/endpoints`);
+//dev
+renderEndpoints(
+  `users/${localStorage.getItem("currentUser")}/${appName.innerHTML}/endpoints`
+);

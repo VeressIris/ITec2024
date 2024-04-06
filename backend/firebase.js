@@ -62,11 +62,21 @@ export function login() {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
-      addUserToDatabase(user);
-      localStorage.setItem("currentUser", user.uid);
-      location.reload();
 
-      // IdP data available using getAdditionalUserInfo(result)
+      get(child(ref(database), `users/${auth.currentUser.uid}`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log("User already exists in the database");
+          } else {
+            addUserToDatabase(user);
+            console.log("User added to the database");
+          }
+          localStorage.setItem("currentUser", user.uid);
+          location.reload();
+        })
+        .catch((error) => {
+          console.error("Error checking user existence:", error);
+        });
     })
     .catch((error) => {
       const errorCode = error.code;

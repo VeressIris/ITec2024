@@ -37,32 +37,39 @@ function addUserToDatabase(user) {
   });
 }
 
-export async function addAppToDatabase(appName) {
+export function addAppToDatabase(appName) {
   const userUid = auth.currentUser.uid;
-  const userRef = ref(database, "users/" + userUid);
-  try {
-    const snapshot = await get(userRef);
-    if (snapshot.exists()) {
-      //add to dev apps
-      const userData = snapshot.val();
-      const currentApps = userData.apps || [];
-      const updatedApps = [...currentApps, appName];
-      await set(userRef, { ...userData, apps: updatedApps });
+  set(ref(database, `users/${userUid}/apps/${appName}`), {
+    developer: userUid,
+    status: "stable",
+  });
+  // const userUid = auth.currentUser.uid;
+  // const userRef = ref(database, "users/" + userUid);
+  // try {
+  //   const snapshot = await get(userRef);
+  //   if (snapshot.exists()) {
+  //     //add to dev apps
+  //     const userData = snapshot.val();
+  //     const currentApps = userData.apps || [];
+  //     const updatedApps = [...currentApps, appName];
+  //     await set(userRef, { ...userData, apps: updatedApps });
 
-      console.log(`Added ${appName} to apps`);
-    } else {
-      console.error(`User ${userUid} does not exist`);
-    }
-  } catch (error) {
-    console.error(`Error adding ${appName} to the apps array:`, error);
-  }
+  //     console.log(`Added ${appName} to apps`);
+  //   } else {
+  //     console.error(`User ${userUid} does not exist`);
+  //   }
+  // } catch (error) {
+  //   console.error(`Error adding ${appName} to the apps array:`, error);
+  // }
 
+  //add public app
   set(ref(database, "apps/" + appName), {
     developer: userUid,
+    status: "stable",
   });
 }
 
-const auth = getAuth();
+export const auth = getAuth();
 export function login() {
   signInWithPopup(auth, provider)
     .then((result) => {

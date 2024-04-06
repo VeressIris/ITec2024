@@ -151,3 +151,26 @@ export function submitEndpoint(appName, endpointName) {
     }
   );
 }
+
+export function updateEndpoints(app, endpoint, newStatus) {}
+
+export function getCurrentAppEndpoints() {
+  let endpoints = [];
+  get(
+    child(ref(database), `apps/${localStorage.getItem("currentApp")}/endpoints`)
+  )
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+          console.log(childSnapshot.key);
+          endpoints.push(childSnapshot.key);
+        });
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  return endpoints;
+}

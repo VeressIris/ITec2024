@@ -17,6 +17,7 @@ const publicViewButtonEl = document.getElementById('view-public-dashboard');
 const devViewButtonEl = document.getElementById('view-developer-dashboard');
 const publicDashboardEl = document.getElementById('public_view');
 const devDashboardNoLoginEl = document.getElementById('dev_view-no_login');
+const devDashboardEl = document.getElementById('dev_view');
 
 // Values from HTML elements
 const logStatus = logButtonEl.textContent;
@@ -26,6 +27,7 @@ const publicBtnClickHandler = () => {
     // console.log('buburubu')
     publicDashboardEl.style.display = 'grid';
     devDashboardNoLoginEl.classList.add('hidden');
+    devDashboardEl.classList.add('hidden');
 }
 const devBtnClickHandler = () => {
     // console.log('mimimimimimimi mimimimi only me :D')
@@ -33,9 +35,11 @@ const devBtnClickHandler = () => {
     if (logStatus === 'Log in'){
       // console.log('mimimo');
       devDashboardNoLoginEl.classList.remove('hidden');
+      devDashboardEl.style.display='none';
     }
     else if (logStatus === 'Log out'){
-      console.log('in progress');
+      devDashboardNoLoginEl.classList.add('hidden');
+      devDashboardEl.style.display='grid';
     }
     else{
       console.log(error);

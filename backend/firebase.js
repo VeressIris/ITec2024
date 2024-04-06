@@ -91,6 +91,7 @@ export function submitBug(text, app, endpoint) {
 }
 
 export function submitEndpoint(appName, endpointName) {
+  if (endpointName === "") return;
   //set public endpoint
   set(ref(database, `apps/${appName}/endpoints/${endpointName}`), {
     bug: "",

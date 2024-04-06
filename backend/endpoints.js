@@ -17,12 +17,36 @@ function initBugButtons() {
   }
 }
 
+import { database } from "./firebase.js";
+import {
+  get,
+  child,
+  ref,
+} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 const endpointText = document.getElementById("endpoint-text");
 const endpointSubmit = document.getElementById("submit-endpoint");
-function renderNewEndpoint (endP_name) {
+
+function renderEndpoints() {
+  get(child(ref(database), `apps/${appName.innerHTML}/endpoints`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+          console.log(childSnapshot);
+          renderNewEndpoint(childSnapshot.key, childSnapshot.val().status);
+        });
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function renderNewEndpoint (endPName, endPStatus) {
     const newEndpointHTML = `<div class="dashboard">
-    <h2 class="endpoint-name">${endP_name}</h2>
-    <p class="section">Status: Stable</p>
+    <h2 class="endpoint-name">${endPName}</h2>
+    <p class="section">Status: ${endPStatus}</p>
     <p class="section">History: </p>
     <div id="bug-report">
       <p class="section">Bug reports:</p>
@@ -32,6 +56,7 @@ function renderNewEndpoint (endP_name) {
     </div>`;
     document.getElementById('endpoints_box').insertAdjacentHTML("beforeend", newEndpointHTML);
 }
+
 endpointSubmit.addEventListener("click", () => {
   renderNewEndpoint(endpointText.value);
   console.log("adding endpoint");
@@ -39,3 +64,4 @@ endpointSubmit.addEventListener("click", () => {
 });
 
 initBugButtons();
+renderEndpoints();

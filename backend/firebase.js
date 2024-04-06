@@ -39,6 +39,7 @@ function addUserToDatabase(user) {
 }
 
 export function addAppToDatabase(appName) {
+  if (appName === "") return;
   const userUid = auth.currentUser.uid;
   set(ref(database, `users/${userUid}/apps/${appName}`), {
     developer: userUid,
@@ -84,6 +85,7 @@ export function logout() {
 }
 
 export function submitBug(text, app, endpoint) {
+  if (text === "") return;
   set(ref(database, `apps/${app}/endpoints/${endpoint}`), {
     bug: text,
     solved: false,

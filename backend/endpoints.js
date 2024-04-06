@@ -30,7 +30,7 @@ function renderNewEndpoint (endP_name) {
       <button class="submit-bug"><p>Submit</p></button>
     </div>
     </div>`;
-    document.getElementsByClassName('container').insertAdjacentHTML(newEndpointHTML);
+    document.getElementById('endpoints_box').insertAdjacentHTML("beforeend", newEndpointHTML);
 }
 endpointSubmit.addEventListener("click", () => {
   renderNewEndpoint(endpointText.value);

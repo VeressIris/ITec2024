@@ -5,8 +5,8 @@ D5205A - pink
 */
 
 /* HIDDEN CLASS */
-.hidden{
-    display: none;
+.hidden {
+  display: none;
 }
 /**/
 
@@ -76,82 +76,83 @@ button:hover {
 }
 /* Submit app */
 #submit-new {
-    padding-left: 20px;
-    margin:0;
+  padding-left: 20px;
+  margin: 0;
 }
-#app-name-text{
-    height: 25px;
-    width: 250px;
+#app-name-text {
+  height: 25px;
+  width: 250px;
 }
-#submit-app{
-    border: none;
-    height: 30px;
-    width: 85px;
-    background:#43BFC2;
-    margin-bottom:0;
+#submit-app {
+  border: none;
+  height: 30px;
+  width: 85px;
+  background: #43bfc2;
+  margin-bottom: 0;
 }
-#submit-app:hover{
-    background-color:#32927C;
-    transition: margin-right 2s ease-in-out .5s;
+#submit-app:hover {
+  background-color: #32927c;
+  transition: margin-right 2s ease-in-out 0.5s;
 }
-#submit-app p{
-    color: white;
-    font-weight:600;
-    margin:0;
-    text-align:left;
-    font-size: 18px;
+#submit-app p {
+  color: white;
+  font-weight: 600;
+  margin: 0;
+  text-align: left;
+  font-size: 18px;
 }
 /* LOGIN AND LOGOUT button top right corner */
-#login-and-logout{
-    border: none;
-    height: 30px;
-    width: 70px;
-    background:#43BFC2;
-    margin-bottom:0;
+#login-and-logout {
+  border: none;
+  height: 30px;
+  width: 70px;
+  background: #43bfc2;
+  margin-bottom: 0;
 }
-#login-and-logout:hover{
-    background-color:#32927C;
-    transition: margin-right 2s ease-in-out .5s;
+#login-and-logout:hover {
+  background-color: #32927c;
+  transition: margin-right 2s ease-in-out 0.5s;
 }
-#login-and-logout p{
-    color: white;
-    font-weight:600;
-    margin:0;
-    text-align:left;
-    font-size: 18px;
+#login-and-logout p {
+  color: white;
+  font-weight: 600;
+  margin: 0;
+  text-align: left;
+  font-size: 18px;
 }
 
 /*Log buttons de pe login.html*/
-.log-buttons{
-    border: none;
-    height: 90px;
-    width: 210px;
-    background:#43BFC2;
-    margin-bottom:0;
-    margin-left: 20px;
-    margin-right: 20px;
+.log-buttons {
+  border: none;
+  height: 90px;
+  width: 210px;
+  background: #43bfc2;
+  margin-bottom: 0;
+  margin-left: 20px;
+  margin-right: 20px;
 }
-.log-buttons p{
+.log-buttons {
   color: white;
-  font-weight:600;
-  margin:0;
-  text-align:center;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
   font-size: 18px;
 }
-.log-buttons:hover{
-  background-color:#32927C;
-  transition: margin-right 2s ease-in-out .5s;
+
+.log-buttons:hover {
+  background-color: #32927c;
+  transition: margin-right 2s ease-in-out 0.5s;
 }
 
 /* DEV - NO LOGIN */
 
-#dev_view-no_login{
+#dev_view-no_login {
   padding-left: 20px;
   padding-top: 20px;
   padding-bottom: 40px;
   height: 253.2px;
   width: 346.41px;
 }
-#nologin_message{
+#nologin_message {
   color: #970404;
 }

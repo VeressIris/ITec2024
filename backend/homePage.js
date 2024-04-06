@@ -1,8 +1,6 @@
 //BACKEND JS
 
 import { addAppToDatabase } from "./firebase.js";
-const appNameText = document.getElementById("app-name-text");
-const submitApp = document.getElementById("submit-app");
 
 // FRONTEND JS
 
@@ -21,6 +19,7 @@ const publicBtnClickHandler = () => {
   renderApps(`/apps`);
   dashboardEl.style.display = "grid";
 };
+
 const devBtnClickHandler = () => {
   if (logButtonEl.textContent === "Login") {
     dashboardEl.innerHTML = "You must be logged in";
@@ -33,11 +32,12 @@ const devBtnClickHandler = () => {
     </div>`;
     if (document.getElementById("submit-new") !== null) return;
     dashboardEl.insertAdjacentHTML("afterend", newAppHTML);
+    const submitApp = document.getElementById("submit-app");
     submitApp.addEventListener("click", () => {
-      const appName = appNameText.value;
+      const appName = document.getElementById("app-name-text").value;
       addAppToDatabase(appName);
-      publicDashboardEl.innerHTML = "";
-      renderApps();
+      dashboardEl.innerHTML = "";
+      renderApps(`users/${localStorage.getItem("currentUser")}/apps`);
     });
   } else {
     console.log(error);
@@ -72,15 +72,32 @@ function renderApps(path) {
 
 //Render new application
 const renderNewApp = (appName, appStatus, nrOfEndpoints) => {
-  const newAppHTML = `
-    <div class="dashboard">
-      <h2>${appName}</h2>
-      <p class="section">Status: ${appStatus}</p>
-      <p class="section">Endpoints: ${nrOfEndpoints}</p>
-      <a href="../html/endpoints.html">See more</a>
-    </div>`;
-  dashboardEl.insertAdjacentHTML("beforeend", newAppHTML);
+  const dashboardDiv = document.createElement("div");
+  dashboardDiv.classList.add("dashboard");
+  const heading = document.createElement("h2");
+  heading.textContent = appName;
+  const statusParagraph = document.createElement("p");
+  statusParagraph.classList.add("section");
+  statusParagraph.textContent = `Status: ${appStatus}`;
+  const endpointsParagraph = document.createElement("p");
+  endpointsParagraph.classList.add("section");
+  endpointsParagraph.textContent = `Endpoints: ${nrOfEndpoints}`;
+  const seeMoreLink = document.createElement("a");
+  seeMoreLink.textContent = "See more";
+  seeMoreLink.href = "../html/endpoints.html";
+  seeMoreLink.onclick = () => setCurrentApp(appName);
+
+  dashboardDiv.appendChild(heading);
+  dashboardDiv.appendChild(statusParagraph);
+  dashboardDiv.appendChild(endpointsParagraph);
+  dashboardDiv.appendChild(seeMoreLink);
+
+  dashboardEl.appendChild(dashboardDiv);
 };
+
+function setCurrentApp(appName) {
+  localStorage.setItem("currentApp", appName);
+}
 
 publicViewButtonEl.addEventListener("click", publicBtnClickHandler);
 devViewButtonEl.addEventListener("click", devBtnClickHandler);

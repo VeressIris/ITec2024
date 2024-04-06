@@ -64,6 +64,8 @@ export function login() {
       const user = result.user;
       addUserToDatabase(user);
       localStorage.setItem("currentUser", user.uid);
+      location.reload();
+
       // IdP data available using getAdditionalUserInfo(result)
     })
     .catch((error) => {
@@ -77,8 +79,9 @@ export function login() {
 export function logout() {
   signOut(auth)
     .then(() => {
-      localStorage.setItem("user", "");
+      localStorage.setItem("currentUser", "");
       console.log("signed out");
+      location.reload();
     })
     .catch((error) => {
       console.log(error);
@@ -94,12 +97,12 @@ export function getBugList(appName, endpoint) {
           // console.log(childSnapshot.key);
           bugList.push(childSnapshot.key);
         });
-        return bugList;
       } else {
         console.log("No data available");
       }
     }
   );
+  return bugList;
 }
 
 export function submitBug(text, app, endpoint) {

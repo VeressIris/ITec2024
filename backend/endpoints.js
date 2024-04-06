@@ -1,28 +1,13 @@
 import { getBugList, submitBug, submitEndpoint } from "./firebase.js";
-
-const appName = document.getElementById("app-name");
-const endpoints = document.getElementsByClassName("endpoint-name");
-const endpointBugSubmit = document.getElementsByClassName("submit-bug");
-const endpointBugText = document.getElementsByClassName("bug-text");
-
-function initBugButtons() {
-  for (let i = 0; i < endpoints.length; i++) {
-    endpointBugSubmit[i].addEventListener("click", () => {
-      submitBug(
-        endpointBugText[i].value,
-        appName.innerHTML,
-        endpoints[i].innerText
-      );
-    });
-  }
-}
-
 import { database } from "./firebase.js";
 import {
   get,
   child,
   ref,
 } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+
+const appName = document.getElementById("app-name");
+
 const endpointText = document.getElementById("endpoint-text");
 const endpointSubmit = document.getElementById("submit-endpoint");
 
@@ -42,21 +27,40 @@ function renderEndpoints() {
       console.error(error);
     });
 }
-// PUBLIC
+// horror ce-i aici
 function renderNewEndpoint(endPName, endPStatus) {
-  const newEndpointHTML = `<div class="dashboard">
-    <h2 class="endpoint-name">${endPName}</h2>
-    <p class="section">Status: ${endPStatus}</p>
-    <p class="section">History: </p>
-    <div id="bug-report">
-      <p class="section">Bug reports:</p>
-      <input class="bug-text" type="text" />
-      <button class="submit-bug"><p>Submit</p></button>
-    </div>
-    </div>`;
-  document
-    .getElementById("endpoints_box")
-    .insertAdjacentHTML("beforeend", newEndpointHTML);
+  const dashboard = document.createElement("div");
+  dashboard.className = "dashboard";
+  const endPointName = document.createElement("h2");
+  endPointName.innerText = endPName;
+  dashboard.appendChild(endPointName);
+  const status = document.createElement("p");
+  status.className = "section";
+  status.innerText = `Status: ${endPStatus}`;
+  dashboard.appendChild(status);
+  const history = document.createElement("p");
+  history.className = "section";
+  history.innerText = "History:";
+  dashboard.appendChild(history);
+  const bugReports = document.createElement("div");
+  bugReports.id = "bug-report";
+  const bugReportTitle = document.createElement("p");
+  bugReportTitle.className = "section";
+  bugReportTitle.innerText = "Bug reports:";
+  bugReports.appendChild(bugReportTitle);
+  const bugText = document.createElement("input");
+  bugText.type = "text";
+  bugText.className = "bug-text";
+  bugReports.appendChild(bugText);
+  const submitButton = document.createElement("button");
+  submitButton.className = "submit-bug";
+  submitButton.innerHTML = "<p>Submit</p>";
+  submitButton.addEventListener("click", () => {
+    submitBug(bugText.value, appName.innerHTML, endPName);
+  });
+  bugReports.appendChild(submitButton);
+  dashboard.appendChild(bugReports);
+  document.getElementById("endpoints_box").appendChild(dashboard);
 }
 
 //DEV
@@ -89,15 +93,15 @@ renderBugs(
   }/endpoints/bugs`
 );
 //Not working
-function renderNewDevEndpoint(endPName, endPStatus) {
-  renderBugs();
-  let bugListDb;
-  let bugListEl = document.getElementById("bugList");
-  for (i = 0; i < bugListDb.length; ++i) {
-    let liAux = document.createElement("li");
-    liAux.innerHTML = `<li><label><input type="checkbox">${bugListDb[i]}</label></li>`;
-    bugListEl.appendChild(li);
-  }
+function renderNewDevEndpoint (endPName, endPStatus){
+    getBugList();
+    let bugListDb;
+    let bugListEl = document.getElementById("bugList");
+    for (i = 0; i < bugListDb.length; ++i) {
+        let liAux = document.createElement('li');
+          liAux.innerHTML = `<li><label><input type="checkbox">${bugListDb[i]}</label></li>`;
+          bugListEl.appendChild(li);
+    }
 }
 
 endpointSubmit.addEventListener("click", () => {
@@ -105,5 +109,4 @@ endpointSubmit.addEventListener("click", () => {
   submitEndpoint(appName.innerHTML, endpointText.value);
 });
 
-initBugButtons();
 renderEndpoints();

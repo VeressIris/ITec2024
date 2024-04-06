@@ -53,22 +53,22 @@
 /*ENDPOINTS ONLY*/
 
 /*!!!Public!!!*/
-#bug-text{
+.bug-text{
     height: 25px;
     width: 250px;
 }
-#submit-bug{
+.submit-bug{
     border: none;
     height: 30px;
     width: 75px;
     background:#43BFC2;
     margin-bottom:0;
 }
-#submit-bug:hover{
+.submit-bug:hover{
     background-color:#32927C;
     transition: margin-right 2s ease-in-out .5s;
 }
-#submit-bug p{
+.submit-bug p{
     color: white;
     font-weight:600;
     margin:0;

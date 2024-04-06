@@ -84,15 +84,27 @@ export function logout() {
       console.log(error);
     });
 }
-//Not done
-export function getBugList() {
-  console.log("Running");
+
+export function getBugList(appName, endpoint) {
+  let bugList = [];
+  get(child(ref(database), `apps/${appName}/endpoints/${endpoint}/bugs`)).then(
+    (snapshot) => {
+      if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+          // console.log(childSnapshot.key);
+          bugList.push(childSnapshot.key);
+        });
+        return bugList;
+      } else {
+        console.log("No data available");
+      }
+    }
+  );
 }
 
 export function submitBug(text, app, endpoint) {
   if (text === "") return;
-  set(ref(database, `apps/${app}/endpoints/${endpoint}/bugs`), {
-    message: text,
+  set(ref(database, `apps/${app}/endpoints/${endpoint}/bugs/${text}`), {
     solved: false,
   });
 }
@@ -101,7 +113,6 @@ export function submitEndpoint(appName, endpointName) {
   if (endpointName === "") return;
   //set public endpoint
   set(ref(database, `apps/${appName}/endpoints/${endpointName}`), {
-    bug: "",
     solved: false,
     status: "stable",
   });
@@ -112,7 +123,6 @@ export function submitEndpoint(appName, endpointName) {
       `users/${auth.currentUser.uid}/apps/${appName}/endpoints/${endpointName}`
     ),
     {
-      bug: "",
       solved: false,
       status: "stable",
     }

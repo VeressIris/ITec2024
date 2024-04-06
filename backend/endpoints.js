@@ -62,46 +62,16 @@ function renderNewEndpoint(endPName, endPStatus) {
   dashboard.appendChild(bugReports);
   document.getElementById("endpoints_box").appendChild(dashboard);
 }
-
-//DEV
-
-//Not done - GETBUGS
-
-const bugHistoryEl = document.getElementById("bug_history");
-
-function renderBugs(path) {
-  dashboardEl.innerHTML = "";
-  get(child(ref(database), path))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        snapshot.forEach((childSnapshot) => {
-          console.log(childSnapshot.key);
-          childSnapshot.key, childSnapshot.val().status, 0;
-        });
-      } else {
-        console.log("No bugs!");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
-renderBugs(
-  `users/${localStorage.getItem("currentUser")}/apps${
-    appName.innerHTML
-  }/endpoints/bugs`
-);
 //Not working
-function renderNewDevEndpoint (endPName, endPStatus){
-    getBugList();
-    let bugListDb;
-    let bugListEl = document.getElementById("bugList");
-    for (i = 0; i < bugListDb.length; ++i) {
-        let liAux = document.createElement('li');
-          liAux.innerHTML = `<li><label><input type="checkbox">${bugListDb[i]}</label></li>`;
-          bugListEl.appendChild(li);
-    }
+function renderNewDevEndpoint(endPName, endPStatus) {
+  getBugList();
+  let bugListDb;
+  let bugListEl = document.getElementById("bugList");
+  for (i = 0; i < bugListDb.length; ++i) {
+    let liAux = document.createElement("li");
+    liAux.innerHTML = `<li><label><input type="checkbox">${bugListDb[i]}</label></li>`;
+    bugListEl.appendChild(li);
+  }
 }
 
 endpointSubmit.addEventListener("click", () => {

@@ -19,10 +19,10 @@ function initBugButtons() {
 
 const endpointText = document.getElementById("endpoint-text");
 const endpointSubmit = document.getElementById("submit-endpoint");
-function renderNewEndpoint (endP_name) {
-    const newEndpointHTML = `<div class="dashboard">
+function renderNewEndpoint(endP_name, endP_status) {
+  const newEndpointHTML = `<div class="dashboard">
     <h2 class="endpoint-name">${endP_name}</h2>
-    <p class="section">Status: Stable</p>
+    <p class="section">Status: ${endP_status}</p>
     <p class="section">History: </p>
     <div id="bug-report">
       <p class="section">Bug reports:</p>
@@ -30,10 +30,11 @@ function renderNewEndpoint (endP_name) {
       <button class="submit-bug"><p>Submit</p></button>
     </div>
     </div>`;
-    document.getElementById('endpoints_box').insertAdjacentHTML("beforeend", newEndpointHTML);
+  document
+    .getElementById("endpoints_box")
+    .insertAdjacentHTML("beforeend", newEndpointHTML);
 }
 endpointSubmit.addEventListener("click", () => {
-  renderNewEndpoint(endpointText.value);
   console.log("adding endpoint");
   submitEndpoint(appName.innerHTML, endpointText.value);
 });

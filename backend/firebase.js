@@ -98,20 +98,19 @@ export function logout() {
     });
 }
 
-export function getBugList(appName, endpoint) {
+export async function getBugList(appName, endpoint) {
   let bugList = [];
-  get(child(ref(database), `apps/${appName}/endpoints/${endpoint}/bugs`)).then(
-    (snapshot) => {
-      if (snapshot.exists()) {
-        snapshot.forEach((childSnapshot) => {
-          // console.log(childSnapshot.key);
-          bugList.push(childSnapshot.key);
-        });
-      } else {
-        console.log("No data available");
-      }
-    }
+  const snapshot = await get(
+    child(ref(database), `apps/${appName}/endpoints/${endpoint}/bugs`)
   );
+  if (snapshot.exists()) {
+    snapshot.forEach((childSnapshot) => {
+      // console.log(childSnapshot.key);
+      bugList.push(childSnapshot.key);
+    });
+  } else {
+    console.log("No data available");
+  }
   return bugList;
 }
 
@@ -120,6 +119,16 @@ export function submitBug(text, app, endpoint) {
   set(ref(database, `apps/${app}/endpoints/${endpoint}/bugs/${text}`), {
     solved: false,
   });
+  //use these to notify the developer
+  // let devID = "";
+  // get(child(ref(database), `apps/${app}`)).then((snapshot) => {
+  //   if (snapshot.exists()) {
+  //     console.log(snapshot.val().developer);
+  //     devID = snapshot.val().developer;
+  //   } else {
+  //     console.log("No data available");
+  //   }
+  // });
 }
 
 export function submitEndpoint(appName, endpointName) {

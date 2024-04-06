@@ -104,7 +104,7 @@ function renderNewEndpoint(endPName, endPStatus) {
   endpointsBox.appendChild(dashboard);
 }
 
-function renderNewDevEndpoint(endPName, endPStatus) {
+async function renderNewDevEndpoint(endPName, endPStatus) {
   const dashboard = document.createElement("div");
   dashboard.className = "dashboard";
   const endPointName = document.createElement("h2");
@@ -118,9 +118,14 @@ function renderNewDevEndpoint(endPName, endPStatus) {
   history.className = "section";
   history.innerText = "History:";
   dashboard.appendChild(history);
+  const bugListTitle = document.createElement("p");
+  bugListTitle.innerHTML = "Bug list:";
+  bugListTitle.className = "section";
+  dashboard.appendChild(bugListTitle);
   const bugListElem = document.createElement("div");
   bugListElem.id = "bug-list";
-  const bugList = getBugList(appName.innerHTML, endPName);
+  const bugList = await getBugList(appName.innerHTML, endPName);
+  console.log(bugList);
   if (bugList.length > 0) {
     bugList.forEach((bug) => {
       const bugElem = document.createElement("p");

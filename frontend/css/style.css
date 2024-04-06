@@ -156,3 +156,28 @@ button:hover {
 #nologin_message {
   color: #970404;
 }
+
+/*Submit endpoint*/
+#submit-endpoint p{
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  font-size: 14px;
+  text-align: center;
+}
+#endpoint-text{
+  height: 30px;
+  width: 300px;
+}
+#submit-endpoint{
+  border: none;
+  height: 40px;
+  width: 100px;
+  background: #43bfc2;
+  margin-bottom: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+#submit-endpoint:hover{
+  background-color: #32927c;
+}

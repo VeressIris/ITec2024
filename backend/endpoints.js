@@ -16,7 +16,7 @@ function renderEndpoints() {
     .then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
-          console.log(childSnapshot);
+          // console.log(childSnapshot);
           renderNewEndpoint(childSnapshot.key, childSnapshot.val().status);
         });
       } else {
@@ -121,3 +121,4 @@ endpointSubmit.addEventListener("click", () => {
 });
 
 renderEndpoints();
+getBugList("App name", "testing");

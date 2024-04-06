@@ -22,7 +22,7 @@ const devDashboardEl = document.getElementById('dev_view');
 // Values from HTML elements
 const logStatus = logButtonEl.textContent;
 
-//Functions
+//Click handlers
 const publicBtnClickHandler = () => {
     // console.log('buburubu')
     publicDashboardEl.style.display = 'grid';
@@ -44,6 +44,18 @@ const devBtnClickHandler = () => {
     else{
       console.log(error);
     }
+}
+// Render apps
+const renderNewApp = () => {
+  // de luat date din database
+  
+  const newAppHTML=`
+  <div class="dashboard">
+    <h2>${appName}</h2>
+    <p class="section">Status: ${appStatus}</p>
+    <p class="section">Endpoints: ${nrOfEndpoints}</p>
+    <a href="../html/endpoints.html">See more</a>
+  </div>`;
 }
 
 console.log(logStatus);

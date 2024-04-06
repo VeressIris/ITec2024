@@ -26,34 +26,13 @@
       <button id="view-developer-dashboard">Developer dashboard</button>
     </div>
     <!-- PUBLIC -->
-    <div id="public_view" class="container">
-      <div class="dashboard">
-        <h2>APPNAME</h2>
-        <p class="section">Status: Stable</p>
-        <p class="section">Endpoints:</p>
-        <a href="../html/endpoints.html">See more</a>
-      </div>
-    </div>
+    <div id="public_view" class="container"></div>
     <!-- DEV - NOT LOGGED IN -->
     <div id="dev_view-no_login" class="hidden">
       <h2 id="nologin_message">You need to log in to view your apps!</h2>
       <h3 id="nologin_instruction">
         Click the button in the top right corner to log in with Google.
       </h3>
-    </div>
-    <!-- DEV - LOGGED IN -->
-    <div id="dev_view" class="container hidden">
-      <div class="dashboard">
-        <h2>APPNAME</h2>
-        <p class="section">Status: Stable</p>
-        <p class="section">Endpoints:</p>
-        <a href="../endpointsPage/endpoints.html">See more</a>
-      </div>
-      <div id="submit-new">
-        <h2>Submit a new app:</h2>
-        <input id="app-name-text" type="text" />
-        <button id="submit-app"><p>Add app</p></button>
-      </div>
     </div>
     <script type="module" src="../../backend/firebase.js"></script>
     <script type="module" src="../../backend/homePage.js"></script>

@@ -85,14 +85,14 @@ export function logout() {
     });
 }
 //Not done
-export function getBugList (){
-  console.log('Running');
+export function getBugList() {
+  console.log("Running");
 }
 
 export function submitBug(text, app, endpoint) {
   if (text === "") return;
-  set(ref(database, `apps/${app}/endpoints/${endpoint}`), {
-    bug: text,
+  set(ref(database, `apps/${app}/endpoints/${endpoint}/bugs`), {
+    message: text,
     solved: false,
   });
 }

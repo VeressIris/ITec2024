@@ -156,20 +156,20 @@ button:hover {
 }
 
 /*Submit endpoint*/
-#submit-endpoint p{
+#submit-endpoint p {
   color: white;
   font-weight: 600;
   text-align: left;
   font-size: 14px;
   text-align: center;
 }
-#endpoint-text{
+#endpoint-text {
   height: 30px;
   width: 300px;
 }
 
 /* SUBMIT ENDPOINT */
-#submit-endpoint{
+#submit-endpoint {
   border: none;
   height: 40px;
   width: 100px;
@@ -178,6 +178,12 @@ button:hover {
   margin-left: 20px;
   margin-right: 20px;
 }
-#submit-endpoint:hover{
+#submit-endpoint:hover {
   background-color: #32927c;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  color: black;
+  font-size: 32px;
 }

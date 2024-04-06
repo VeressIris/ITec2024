@@ -54,11 +54,12 @@ function renderNewEndpoint (endPName, endPStatus) {
       <button class="submit-bug"><p>Submit</p></button>
     </div>
     </div>`;
-    document.getElementById('endpoints_box').insertAdjacentHTML("beforeend", newEndpointHTML);
+  document
+    .getElementById("endpoints_box")
+    .insertAdjacentHTML("beforeend", newEndpointHTML);
 }
 
 endpointSubmit.addEventListener("click", () => {
-  renderNewEndpoint(endpointText.value);
   console.log("adding endpoint");
   submitEndpoint(appName.innerHTML, endpointText.value);
 });

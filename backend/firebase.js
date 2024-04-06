@@ -84,10 +84,7 @@ export function logout() {
       console.log(error);
     });
 }
-//Not done
-export function getBugList (){
-  console.log('Running');
-}
+
 
 export function submitBug(text, app, endpoint) {
   if (text === "") return;

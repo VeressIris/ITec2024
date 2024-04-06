@@ -1,7 +1,6 @@
-const endpointUrl = "https://randomuser.me/api/";
 let last10Status = [];
 let k = 0;
-function get10Status(interval) {
+function get10Status(interval, endpointUrl) {
   fetch(endpointUrl)
     .then((response) => {
       k++;
@@ -18,7 +17,7 @@ function get10Status(interval) {
       console.error("There was a problem with the endpoint:", error.message);
     })
     .finally(() => {
-      setTimeout(get10Status, interval, interval);
+      setTimeout(get10Status, interval, endpointUrl, interval);
     });
 }
 
@@ -35,4 +34,9 @@ function getEndpointStatus() {
   return "stable";
 }
 
-get10Status(10000);
+// get10Status(5000, "http://www.boredapi.com/api/");
+// get10Status(5000, "https://api.publicapis.org/entries");
+// get10Status(5000, "https://official-joke-api.appspot.com/random_joke");
+// get10Status(5000, "https://randomuser.me/api/");
+// get10Status(5000, "	https://v2.jokeapi.dev/joke/Any?safe-mode");
+// get10Status(5000, "	https://randomuser.me/api/");

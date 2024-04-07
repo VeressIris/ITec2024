@@ -1,4 +1,3 @@
-// server.mjs
 import { createServer, get } from "node:http";
 import admin from "firebase-admin";
 import fs from "fs";
@@ -33,29 +32,37 @@ server.listen(3000, "127.0.0.1", () => {
       const endpoints = childSnapshot.val().endpoints;
       Object.keys(endpoints).forEach((endpoint) => {
         // console.log(childSnapshot.val().link + endpoint);
-        get10Status(5000, childSnapshot.val().link + endpoint);
+        get10Status(
+          5000,
+          childSnapshot.val().link + endpoint,
+          childSnapshot.key,
+          endpoint
+        );
       });
     });
   });
 
-  function get10Status(interval, endpointUrl) {
+  getAppsStatus();
+
+  function get10Status(interval, endpointUrl, appName, endpoint) {
     let last10Status = [200, 200, 200, 200, 200, 200, 200, 200, 200, 200];
     setInterval(() => {
       fetch(endpointUrl)
         .then((response) => {
           last10Status.push(response.status);
           last10Status = last10Status.splice(1);
-          console.log(last10Status);
-          console.log(getEndpointStatus(last10Status));
+          // console.log(last10Status);
+          const endpointStatus = getEndpointStatus(last10Status);
+          // console.log(endpointStatus);
+          setEndpointStatus(appName, endpoint, endpointStatus);
         })
         .catch((error) => {
-          // last10Status.push(error.status);
-          // last10Status = last10Status.splice(1);
+          last10Status.push(404);
+          last10Status = last10Status.splice(1);
+          setEndpointStatus(appName, endpoint, "down");
+          setAppStatus(appName, "down");
           // console.log(getEndpointStatus(last10Status));
-          console.error(
-            "There was a problem with the endpoint:",
-            error.message
-          );
+          console.log("There was a problem with the endpoint:", error.message);
         });
     }, interval);
   }
@@ -73,6 +80,36 @@ server.listen(3000, "127.0.0.1", () => {
     return "stable";
   }
 
+  function setEndpointStatus(appName, endpoint, newStatus) {
+    database.ref(`apps/${appName}/endpoints/${endpoint}/status`).set(newStatus);
+  }
+
+  function getAppsStatus() {
+    database.ref("apps").on("value", (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        setInterval(() => {
+          const endpoints = childSnapshot.val().endpoints;
+          console.log(endpoints);
+          let badCnt = 0;
+          Object.keys(endpoints).forEach((endpoint) => {
+            console.log(endpoint + ": " + endpoints[endpoint].status);
+            const status = endpoints[endpoint].status;
+            if (status == "down") {
+              badCnt++;
+            }
+          });
+          if (badCnt == 0) setAppStatus(childSnapshot.key, "stable");
+          else if (badCnt < Object.keys(endpoints).length)
+            setAppStatus(childSnapshot.key, "unstable");
+          else setAppStatus(childSnapshot.key, "down");
+        }, 5000);
+      });
+    });
+  }
+
+  function setAppStatus(appName, newStatus) {
+    database.ref(`apps/${appName}/status`).set(newStatus);
+  }
   // get10Status(5000, "http://www.boredapi.com/api/");
   // get10Status(5000, "https://official-joke-api.appspot.com/random_joke");
   //   get10Status(5000, "https://randomuser.me/api/");

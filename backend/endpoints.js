@@ -40,7 +40,7 @@ function renderDevEndpoints() {
     .then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
-          // console.log(childSnapshot);
+          console.log(childSnapshot.val().status);
           renderNewDevEndpoint(childSnapshot.key, childSnapshot.val().status);
         });
       } else {

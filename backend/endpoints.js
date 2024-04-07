@@ -150,4 +150,3 @@ function renderEndpoints() {
 }
 
 renderEndpoints();
-

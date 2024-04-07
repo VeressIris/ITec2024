@@ -79,9 +79,11 @@ button:hover {
   padding-left: 20px;
   margin: 0;
 }
-#app-name-text {
+#app-name-text,
+#app-link-text {
   height: 25px;
   width: 250px;
+  display: block;
 }
 #submit-app {
   border: none;
@@ -89,6 +91,7 @@ button:hover {
   width: 85px;
   background: #43bfc2;
   margin-bottom: 0;
+  margin-top: 16px;
 }
 #submit-app:hover {
   background-color: #32927c;
@@ -187,6 +190,10 @@ button:hover {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   color: black;
   font-size: 32px;
+}
+
+h3 {
+  margin: 8px 0;
 }
 
 #navbar{

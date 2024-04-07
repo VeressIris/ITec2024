@@ -31,23 +31,24 @@ export const database = getDatabase(app);
 const provider = new GoogleAuthProvider();
 
 function addUserToDatabase(user) {
-  //TODO: Check if user already exists (help mentor)
   set(ref(database, "users/" + user.uid), {
     name: user.displayName,
     email: user.email,
   });
 }
 
-export function addAppToDatabase(appName) {
+export function addAppToDatabase(appName, appLink) {
   if (appName === "") return;
   const userUid = auth.currentUser.uid;
   set(ref(database, `users/${userUid}/apps/${appName}`), {
+    link: appLink,
     developer: userUid,
     status: "stable",
   });
 
   //add public app
   set(ref(database, "apps/" + appName), {
+    link: appLink,
     developer: userUid,
     status: "stable",
   });
@@ -149,4 +150,27 @@ export function submitEndpoint(appName, endpointName) {
       status: "stable",
     }
   );
+}
+
+export function updateEndpoints(app, endpoint, newStatus) {}
+
+export function getCurrentAppEndpoints() {
+  let endpoints = [];
+  get(
+    child(ref(database), `apps/${localStorage.getItem("currentApp")}/endpoints`)
+  )
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+          console.log(childSnapshot.key);
+          endpoints.push(childSnapshot.key);
+        });
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  return endpoints;
 }

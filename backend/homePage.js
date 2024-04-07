@@ -14,9 +14,10 @@ const devDashboardEl = document.getElementById("dev_view");
 
 //Click handlers
 const publicBtnClickHandler = () => {
-  // console.log('buburubu')
-  document.getElementById("submit-new").remove();
+  console.log('buburubu')
+  // console.log(document.getElementById("submit-new").innerText);
   renderApps(`/apps`);
+  document.getElementById("submit-new").remove();
   dashboardEl.style.display = "grid";
 };
 

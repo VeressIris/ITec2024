@@ -14,7 +14,7 @@ const devDashboardEl = document.getElementById("dev_view");
 
 //Click handlers
 const publicBtnClickHandler = () => {
-  console.log('buburubu')
+  console.log("buburubu");
   // console.log(document.getElementById("submit-new").innerText);
   renderApps(`/apps`);
   document.getElementById("submit-new").remove();
@@ -25,7 +25,7 @@ const devBtnClickHandler = () => {
   if (logButtonEl.textContent === "Login") {
     dashboardEl.innerHTML = "You must be logged in";
   } else if (logButtonEl.textContent === "Logout") {
-    renderApps(`users/${localStorage.getItem("currentUser")}/apps`);
+    renderDevApps();
     const newAppHTML = `<div id="submit-new">
       <h2>Submit a new app:</h2>
       <h3>App name:</h3>
@@ -42,7 +42,7 @@ const devBtnClickHandler = () => {
       const appLink = document.getElementById("app-link-text").value;
       addAppToDatabase(appName, appLink);
       dashboardEl.innerHTML = "";
-      renderApps(`users/${localStorage.getItem("currentUser")}/apps`);
+      renderDevApps();
     });
   } else {
     console.log(error);
@@ -79,13 +79,18 @@ function renderApps(path) {
       console.error(error);
     });
 }
-function renderDevApps(){
-  get(child(ref(database), `apps/${appName.innerHTML}/endpoints`))
+function renderDevApps() {
+  dashboardEl.innerHTML = "";
+  get(child(ref(database), `apps/`))
     .then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
-          // console.log(childSnapshot);
-          if (currentUser === child(ref(database), `apps/${appName.innerHTML}/developer`)){
+          console.log(childSnapshot.val().developer);
+          if (
+            localStorage.getItem("currentUser") ===
+            childSnapshot.val().developer
+          ) {
+            console.log(childSnapshot.key);
             renderNewApp(childSnapshot.key, childSnapshot.val().status);
           }
         });

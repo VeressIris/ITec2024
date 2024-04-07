@@ -22,10 +22,21 @@
     <ul id="navbar">
       <li><button id="login-and-logout">Log in</button></li>
       <li>
-          <div style="width:60px; display:flex; flex-direction: row; justify-content: flex-end;"><span id="notif_logo" class="material-symbols-outlined"> notifications</span></div>
-          <ul class="dropdown">
-              <li><a href="#">No notifications yet...</a></li>
-          </ul>
+        <div
+          style="
+            width: 60px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+          "
+        >
+          <span id="notif_logo" class="material-symbols-outlined">
+            notifications</span
+          >
+        </div>
+        <ul id="notifs-dropdown" class="dropdown">
+          <li><a href="#">No notifications yet...</a></li>
+        </ul>
       </li>
     </ul>
     <h1 class="bigheading">Itec Monitor</h1>
@@ -46,5 +57,6 @@
     <script type="module" src="../../backend/firebase.js"></script>
     <script type="module" src="../../backend/homePage.js"></script>
     <script type="module" src="../../backend/login.js"></script>
+    <script type="module" src="../../backend/devNotifications.js"></script>
   </body>
 </html>

@@ -121,18 +121,45 @@ export function submitBug(text, app, endpoint) {
     solved: false,
   });
   //use these to notify the developer
-  // let devID = "";
-  // get(child(ref(database), `apps/${app}`)).then((snapshot) => {
-  //   if (snapshot.exists()) {
-  //     console.log(snapshot.val().developer);
-  //     devID = snapshot.val().developer;
-  //   } else {
-  //     console.log("No data available");
-  //   }
-  // });
+  let devID = "";
+  get(child(ref(database), `apps/${app}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val().developer);
+      devID = snapshot.val().developer;
+      set(ref(database, `users/${devID}/messages`), {
+        message: `A new bug has been reported on ${app} endpoint ${endpoint}`,
+        app: app,
+        endpoint: endpoint,
+      });
+    } else {
+      console.log("No data available");
+    }
+  });
 }
 
-export  function submitEndpoint(appName, endpointName) {
+export function getDevMessages() {
+  let devMessages = [];
+  get(
+    child(
+      ref(database),
+      `users/${localStorage.getItem("currentUser")}/messages`
+    )
+  )
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+          console.log("childSnapshot.key");
+        });
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export function submitEndpoint(appName, endpointName) {
   if (endpointName === "") return;
   //set public endpoint
   set(ref(database, `apps/${appName}/endpoints/${endpointName}`), {

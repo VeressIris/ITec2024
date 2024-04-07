@@ -104,16 +104,16 @@ button:hover {
 /* LOGIN AND LOGOUT button top right corner */
 #login-and-logout {
   border: none;
-  height: 30px;
-  width: 70px;
+  height: 45px;
+  width: 105px;
   background: #43bfc2;
-  margin-bottom: 0;
   color: white;
   font-weight: 600;
   margin: 0;
   padding: 10px 5px 10px;
-  text-align: left;
+  text-align: center;
   font-size: 18px;
+  border-radius:20px;
 }
 #login-and-logout:hover {
   background-color: #32927c;
@@ -192,4 +192,8 @@ button:hover {
 #navbar{
   display: flex;
   justify-content: flex-end;
+}
+#notif_logo{
+  height:45px;
+  width:45px;
 }

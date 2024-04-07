@@ -68,7 +68,7 @@ function renderApps(path) {
             childSnapshot.key,
             childSnapshot.val().link,
             childSnapshot.val().status,
-            0
+            Object.keys(childSnapshot.val().endpoints).length
           );
         });
       } else {
@@ -90,8 +90,13 @@ function renderDevApps() {
             localStorage.getItem("currentUser") ===
             childSnapshot.val().developer
           ) {
-            console.log(childSnapshot.key);
-            renderNewApp(childSnapshot.key, childSnapshot.val().status);
+            // console.log(Object.keys(childSnapshot.val().endpoints).length);
+            renderNewApp(
+              childSnapshot.key,
+              childSnapshot.val().link,
+              childSnapshot.val().status,
+              Object.keys(childSnapshot.val().endpoints).length
+            );
           }
         });
       } else {

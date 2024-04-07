@@ -25,9 +25,11 @@ ul li ul.dropdown li{
     color: white;
 }
 ul li ul.dropdown{
-    width:100%;
+    width:250px;
     background: #43bfc2;
     position:absolute;
+    right:10px;
+    top: 65px;
     z-index:999;
     display: none;
     border-radius: 30px;

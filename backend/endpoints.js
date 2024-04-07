@@ -149,4 +149,23 @@ function renderEndpoints() {
   }
 }
 
+function renderDevEndpointsFromApps(){
+  get(child(ref(database), `apps/${appName.innerHTML}/endpoints`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+          // console.log(childSnapshot);
+          if (currentUser === child(ref(database), `apps/${appName.innerHTML}/developer`)){
+            renderNewEndpoint(childSnapshot.key, childSnapshot.val().status);
+          }
+        });
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 renderEndpoints();

@@ -14,9 +14,10 @@ const devDashboardEl = document.getElementById("dev_view");
 
 //Click handlers
 const publicBtnClickHandler = () => {
-  // console.log('buburubu')
-  document.getElementById("submit-new").remove();
+  console.log('buburubu')
+  // console.log(document.getElementById("submit-new").innerText);
   renderApps(`/apps`);
+  document.getElementById("submit-new").remove();
   dashboardEl.style.display = "grid";
 };
 
@@ -69,6 +70,24 @@ function renderApps(path) {
             childSnapshot.val().status,
             0
           );
+        });
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+function renderDevApps(){
+  get(child(ref(database), `apps/${appName.innerHTML}/endpoints`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        snapshot.forEach((childSnapshot) => {
+          // console.log(childSnapshot);
+          if (currentUser === child(ref(database), `apps/${appName.innerHTML}/developer`)){
+            renderNewApp(childSnapshot.key, childSnapshot.val().status);
+          }
         });
       } else {
         console.log("No data available");

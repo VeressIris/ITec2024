@@ -136,3 +136,5 @@ publicViewButtonEl.addEventListener("click", publicBtnClickHandler);
 devViewButtonEl.addEventListener("click", devBtnClickHandler);
 
 renderApps(`/apps`);
+
+/*Set app status code*/

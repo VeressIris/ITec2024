@@ -29,18 +29,10 @@ function renderPublicEndpoints() {
 }
 
 function renderDevEndpoints() {
-  get(
-    child(
-      ref(database),
-      `users/${localStorage.getItem("currentUser")}/apps/${
-        appName.innerHTML
-      }/endpoints`
-    )
-  )
+  get(child(ref(database), `apps/${appName.innerHTML}/endpoints`))
     .then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
-          console.log(childSnapshot.val().status);
           renderNewDevEndpoint(childSnapshot.key, childSnapshot.val().status);
         });
       } else {
@@ -138,24 +130,38 @@ async function renderNewDevEndpoint(endPName, endPStatus) {
 }
 
 function renderEndpoints() {
-  endpointsBox.innerHTML = "";
-  console.log(localStorage.getItem("currentUser"));
-  if (localStorage.getItem("currentUser") != "") {
-    console.log("rendering dev endpoints");
-    renderDevEndpoints();
-  } else {
-    console.log("rendering public endpoints");
-    renderPublicEndpoints();
-  }
+  get(child(ref(database), `apps/${appName.innerHTML}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      const appDev = snapshot.val().developer;
+      endpointsBox.innerHTML = "";
+      console.log(localStorage.getItem("currentUser"));
+      console.log(appDev);
+      if (
+        localStorage.getItem("currentUser") != "" &&
+        appDev === localStorage.getItem("currentUser")
+      ) {
+        console.log("rendering dev endpoints");
+        renderDevEndpoints();
+      } else {
+        console.log("rendering public endpoints");
+        renderPublicEndpoints();
+      }
+    } else {
+      console.log("No data available");
+    }
+  });
 }
 
-function renderDevEndpointsFromApps(){
+function renderDevEndpointsFromApps() {
   get(child(ref(database), `apps/${appName.innerHTML}/endpoints`))
     .then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
           // console.log(childSnapshot);
-          if (currentUser === child(ref(database), `apps/${appName.innerHTML}/developer`)){
+          if (
+            currentUser ===
+            child(ref(database), `apps/${appName.innerHTML}/developer`)
+          ) {
             renderNewEndpoint(childSnapshot.key, childSnapshot.val().status);
           }
         });

@@ -109,7 +109,18 @@ const renderNewApp = (appName, appLink, appStatus, nrOfEndpoints) => {
   dashboardEl.appendChild(dashboardDiv);
 };
 
-function setCurrentApp(appName) {
+async function setCurrentApp(appName) {
+  try {
+    const response = await fetch("http://127.0.0.1:3000/app", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({ currentApp: appName }),
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
   localStorage.setItem("currentApp", appName);
 }
 

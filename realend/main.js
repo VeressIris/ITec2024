@@ -2,6 +2,8 @@
 import { createServer } from "node:http";
 import admin from "firebase-admin";
 import fs from "fs";
+import querystring from "querystring";
+
 const serviceAccount = JSON.parse(
   fs.readFileSync(
     "../itec2024-e4088-firebase-adminsdk-dqjjo-cef864076c.json",
@@ -18,6 +20,19 @@ admin.initializeApp({
 const server = createServer((req, res) => {
   res.writeHead(200, { "Content-Type": "text/plain" });
   res.end("Hello World!\n");
+
+  if (req.method === "POST" && req.url === "/app") {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
+    });
+
+    req.on("end", () => {
+      const postData = querystring.parse(body);
+      const currentApp = postData.currentApp;
+      console.log(currentApp);
+    });
+  }
 });
 
 // starts a simple http server locally on port 3000
@@ -26,8 +41,8 @@ server.listen(3000, "127.0.0.1", () => {
 
   const database = admin.database();
 
-  let last10Status = [200, 200, 200, 200, 200, 200, 200, 200, 200, 200];
   function get10Status(interval, endpointUrl) {
+    let last10Status = [200, 200, 200, 200, 200, 200, 200, 200, 200, 200];
     setInterval(() => {
       fetch(endpointUrl)
         .then((response) => {
@@ -60,9 +75,6 @@ server.listen(3000, "127.0.0.1", () => {
     if (okCount < 10) return "unstable";
     return "stable";
   }
-
-  //   const endpoints = getCurrentAppEndpoints();
-  //   console.log(endpoints);
 
   // get10Status(5000, "http://www.boredapi.com/api/");
   // get10Status(5000, "https://official-joke-api.appspot.com/random_joke");
